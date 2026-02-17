@@ -6,4 +6,154 @@
     <h1>Surprise!</h1>
     <p>Welcome to the surprise page!</p>
 </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #fff0f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.3);
+            text-align: center;
+            width: 320px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 { color: #ff4d6d; font-size: 24px; margin-bottom: 10px; }
+        p { color: #590d22; font-size: 18px; margin-bottom: 30px; line-height: 1.4; }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 50px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4);
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: absolute; 
+        }
+
+        #success {
+            display: none;
+        }
+
+        .emoji-float {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div id="questionArea">
+        <div class="emoji-float">💌</div>
+        <h1>Hey Gorgeous!</h1>
+        <p>Will you be my date for a special dinner this Friday?</p>
+        
+        <div class="btn-container">
+            <button id="yesBtn" onclick="celebrate()">YES!</button>
+            <button id="noBtn" onmouseover="moveNoButton()">No</button>
+        </div>
+    </div>
+
+    <div id="success">
+        <div class="emoji-float">🥰</div>
+        <h1 style="font-size: 32px;">It's a Date!</h1>
+        <p>I can't wait to see you. <br> I'll pick you up at 7!</p>
+    </div>
+</div>
+
+<script>
+    // 1. Logic for the "Runaway" No Button
+    function moveNoButton() {
+        const btn = document.getElementById('noBtn');
+        // Calculate safe boundaries
+        const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+        
+        btn.style.left = x + 'px';
+        btn.style.top = y + 'px';
+    }
+
+    // 2. Logic for the Yes Celebration
+    function celebrate() {
+        // Hide the question, show the success message
+        document.getElementById('questionArea').style.display = 'none';
+        document.getElementById('success').style.display = 'block';
+        document.body.style.backgroundColor = "#ffccd5";
+
+        // 3. The Confetti Explosion!
+        const duration = 5 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+
+            const particleCount = 50 * (timeLeft / duration);
+            
+            // Create heart-shaped confetti
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                colors: ['#ff4d6d', '#ffccd5', '#ff758f'],
+                shapes: ['heart'] // Some browsers support heart shapes directly!
+            });
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                colors: ['#ff4d6d', '#ffccd5', '#ff758f'],
+                shapes: ['heart']
+            });
+        }, 250);
+    }
+</script>
+
+</body>
 </html>
