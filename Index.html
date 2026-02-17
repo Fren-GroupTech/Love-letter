@@ -1,6 +1,6 @@
-# Love-letter<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<Moi m my wifey>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Request</title>
@@ -56,10 +56,9 @@
         #noBtn {
             background-color: #adb5bd;
             color: white;
-            position: absolute; /* Allows it to move anywhere */
+            position: absolute;
         }
 
-        /* The Success Screen */
         #success {
             display: none;
         }
@@ -82,7 +81,7 @@
         <div class="heart-float">💖</div>
         <h1>Hey [MAUREEN]!</h1>
         <p>I was trying to find the right words to tell you how much you mean to me, but honestly, "I love you" feels like a major understatement.
-Being with you is the highlight of my day, every single day. Whether we’re out doing something exciting or just sitting on the couch doing absolutely nothing, everything is better because you're there. You make my life feel like it’s running on the best possible version of the software—no bugs, just pure happiness.
+Being with you is the highlight of my day, every single day. Whether we're out doing something exciting or just sitting on the couch doing absolutely nothing, everything is better because you're here.
 Thank you for being my person, my best friend, and my greatest adventure.
 Will you marry me this weekend?</p>
         
@@ -102,12 +101,8 @@ Will you marry me this weekend?</p>
 <script>
     function moveNoButton() {
         const btn = document.getElementById('noBtn');
-        
-        // Calculate random positions within the screen
-        // We subtract button width/height so it doesn't go off-screen
         const x = Math.random() * (window.innerWidth - btn.offsetWidth);
         const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-        
         btn.style.left = x + 'px';
         btn.style.top = y + 'px';
     }
@@ -116,12 +111,9 @@ Will you marry me this weekend?</p>
         document.getElementById('questionArea').style.display = 'none';
         document.getElementById('success').style.display = 'block';
         document.body.style.backgroundColor = "#ffccd5";
-        
-        // Optional: Trigger confetti if you're fancy!
         console.log("Mission Accomplished.");
     }
 </script>
 
 </body>
 </html>
-
